@@ -1,1 +1,1 @@
-export { EnrichedController } from "./enrichedController"
+export { ExternalController } from "./externalController"

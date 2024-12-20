@@ -1,1 +1,1 @@
-export { EnrichedPhotoService } from "./enrichedPhotoService"
+export { ExternalPhotoService } from "./externalPhotoService"

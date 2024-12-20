@@ -3,7 +3,7 @@ import { InternalUserService } from "./internalUserService"
 import { InternalPhotoService } from "./internalPhotoService"
 
 
-export class EnrichedPhotoService {
+export class ExternalPhotoService {
   photoService = new InternalPhotoService()
   albumService = new InternalAlbumService()
   userService = new InternalUserService()
@@ -11,7 +11,7 @@ export class EnrichedPhotoService {
     /**
    * Fetch photo, album, and user details in a single enriched response.
    */
-  async getEnrichedPhoto(photoId: number): Promise<any> {
+  async getEnrichedPhotoById(photoId: number): Promise<any> {
     const photo = await this.photoService.getPhotoById(photoId)
     const album = await this.albumService.getAlbumById(photo.albumId)
     const user = await this.userService.getUserById(album.userId)
@@ -38,5 +38,33 @@ export class EnrichedPhotoService {
         }
       }
     }
+  }
+
+  async getEnrichedPhotos(): Promise<any[]> {
+    const [photos, albums, users] = await Promise.all([
+      this.photoService.getPhotos(),
+      this.albumService.getAlbums(),
+      this.userService.getUsers()
+    ])
+
+    // Map users by ID for quick lookup
+    const userMap = new Map(users.map((user) => [user.id, user]))
+
+    // Map albums by ID, and include user info
+    const albumMap = new Map(
+      albums.map((album) => [
+        album.id,
+        {
+          ...album,
+          user: userMap.get(album.userId),
+        },
+      ])
+    )
+
+    // Enrich photos with album and user data
+    return photos.map((photo) => ({
+      ...photo,
+      album: albumMap.get(photo.albumId),
+    }))
   }
 }
