@@ -23,7 +23,13 @@ export class ExternalController {
 
   static async getEnrichedFromFilters(req: Request, res: Response): Promise<void> {
     try {
-      const { title, "album.title": albumTitle, "album.user.email": albumUserEmail } = req.query;
+      const {
+            title,
+            "album.title": albumTitle,
+            "album.user.email": albumUserEmail,
+            limit = "25",
+            offset = "0"
+         } = req.query;
 
       const enrichedPhotos = await externalPhotoService.getEnrichedPhotos()
 
@@ -46,7 +52,13 @@ export class ExternalController {
         return matches
       })
 
-      res.json(filteredPhotos)
+      const parsedLimit = Math.max(1, parseInt(limit as string, 10) || 25); // Default to 25
+      const parsedOffset = Math.max(0, parseInt(offset as string, 10) || 0); // Default to 0
+
+      const paginatedPhotos = filteredPhotos.slice(parsedOffset, parsedOffset + parsedLimit);
+
+
+      res.json(paginatedPhotos)
     } catch (error: any) {
       console.error("Error:", error.message)
       res.status(500).json({ error: "Internal Server Error" })
