@@ -11,4 +11,8 @@ export class InternalPhotoService {
 
     return new Photo(data.id, data.title, data.url, data.thumbnailUrl, data.albumId)
   }
+
+  async getPhotos(): Promise<Photo[]> {
+    return await axios.get<Photo[]>(`${process.env.INTERNAL_API_BASE_URL}/photos`).then((res) => res.data)
+  }
 }

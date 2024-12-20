@@ -11,4 +11,8 @@ export class InternalAlbumService {
 
     return new Album(data.id, data.title, data.userId)
   }
+
+  async getAlbums(): Promise<Album[]> {
+    return await axios.get<Album[]>(`${process.env.INTERNAL_API_BASE_URL}/albums`).then((res) => res.data)
+  }
 }

@@ -1,1 +1,1 @@
-export { enrichedRoutes } from "./enrichedRoutes"
+export { externalRoutes } from "./externalRoutes"

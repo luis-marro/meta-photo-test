@@ -34,4 +34,8 @@ export class InternalUserService {
       }
     )
   }
+
+  async getUsers(): Promise<User[]> {
+    return await axios.get<User[]>(`${process.env.INTERNAL_API_BASE_URL}/users`).then((res) => res.data)
+  }
 }
