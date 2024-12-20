@@ -2,9 +2,9 @@ import { User } from "../../domain/entities";
 import { UserRepository } from "../../domain/interfaces";
 
 export class InMemoryUserRepository implements UserRepository {
-  private users: Map<string, User> = new Map();
+  private users: Map<number, User> = new Map();
 
-  findById(id: string): User | null {
+  findById(id: number): User | null {
     return this.users.get(id) || null;
   }
 

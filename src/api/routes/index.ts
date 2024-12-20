@@ -1,0 +1,1 @@
+export { enrichedRoutes } from "./enrichedRoutes"

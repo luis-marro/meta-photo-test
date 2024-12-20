@@ -1,1 +1,1 @@
-export {InternalUserService } from "./internalUserService"
+export { EnrichedPhotoService } from "./enrichedPhotoService"
