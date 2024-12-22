@@ -10,14 +10,9 @@ COPY package.json package-lock.json ./
 # Install all dependencies (including devDependencies)
 RUN npm install
 
-# Ensure TypeScript is installed globally (optional but helpful)
-RUN npm install -g typescript
-
-# Copy the TypeScript configuration and source code
+# Compile TypeScript to JavaScript
 COPY tsconfig.json .
 COPY src ./src
-
-# Compile TypeScript to JavaScript
 RUN npm run build
 
 # Stage 2: Production
@@ -33,8 +28,9 @@ COPY package.json package-lock.json ./
 # Install only production dependencies
 RUN npm install --only=production
 
-# Expose the application port
-EXPOSE 3000
+# Expose the port for Cloud Run (default 8080)
+ENV PORT=8080
+EXPOSE 8080
 
-# Run the application
+# Run the application (use dynamic port from $PORT)
 CMD ["node", "dist/server.js"]
