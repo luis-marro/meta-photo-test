@@ -1,5 +1,5 @@
 import express, { Application } from "express"
-import { externalRoutes } from "./api/routes"
+import { externalRoutes, homeRoute } from "./api/routes"
 import * as dotenv from "dotenv"
 
 dotenv.config()
@@ -7,6 +7,7 @@ const app: Application = express()
 const PORT = process.env.PORT || 3000
 
 app.use(express.json())
+app.use("/", homeRoute)
 app.use("/api", externalRoutes)
 
 app.listen(PORT, () => {
