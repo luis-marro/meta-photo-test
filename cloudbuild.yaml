@@ -18,3 +18,5 @@ steps:
           - "us-central1"
 images:
     - "gcr.io/$PROJECT_ID/github.com/luis-marro/meta-photo-test:$COMMIT_SHA"
+options:
+  logging: CLOUD_LOGGING_ONLY
