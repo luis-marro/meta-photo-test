@@ -76,7 +76,7 @@ project-root/
 
 ## **Interact with the API + LLM Interaction**
 
-- A Colab Python notebook can be found at [this link](https://colab.research.google.com/drive/1b53gt-AAYZfa623T13qZgj_6AP4Wh3lP?usp=sharing) where the API presented in this readme can be interacted with, as well with a short example of an LLM interaction. This is an example of what such would look like:
+- A Colab Python notebook can be found at the provided link, where the API presented in this readme can be interacted with, as well with a short example of an LLM interaction. This is an example of what such would look like:
 - Prompt: Write a photo short description for an art gallery including the photo and album title, and the artis name.
 - Results:
 - Query for: artist: Leanne Graham, album: quidem molestiae enim, photo title: accusamus beatae ad facilis cum similique qui sunt
